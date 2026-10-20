@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Краткие содержания</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <!-- Добавили anim-header-left -->
+      <h1 class="anim-header-left">Краткие содержания</h1> 
+      
+      <!-- Добавили anim-header-right -->
+      <div class="header-controls anim-header-right"> 
+        <span class="author-name">verycoolprofile</span>
+        <button id="theme-toggle" class="theme-btn" title="Сменить тему">
+          <!-- Иконка луны -->
+          <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <!-- Иконка солнца -->
+          <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button id="info-btn" class="info-btn">Информация</button>
+      </div>
+    </div>
+    <!-- Добавили anim-nav -->
+    <nav id="subjects" class="anim-nav"></nav>
+  </header>
+
+  <!-- Добавили anim-aside к aside и anim-content к section -->
+  <main>
+    <aside id="chapters" class="anim-aside"></aside>
+    <section id="content" class="anim-content">
+      <div class="placeholder">Выбери предмет и параграф.</div>
+    </section>
+  </main>
+
+  <!-- Модальное окно -->
+  <div id="info-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      
+      <div class="modal-tabs">
+        <button class="tab-btn active" data-tab="disclaimer">Disclaimer</button>
+        <button class="tab-btn" data-tab="errors">Ошибки</button>
+      </div>
+
+      <div id="disclaimer" class="tab-content active">
+        <h2>Правовая информация (Disclaimer)</h2>
+        <p>Данный сайт создан исключительно в <b>образовательных и ознакомительных целях</b> для учеников моего класса.</p>
+        <p>Все материалы (краткие содержания) являются <b>авторской переработкой</b> (конспектами) и не являются копией официальных учебников. Тексты написаны своими словами на основе общедоступных образовательных программ.</p>
+        <p>Сайт не претендует на права интеллектуальной собственности издательств и авторов учебников. Если вы являетесь правообладателем и считаете, что ваши права нарушены, пожалуйста, свяжитесь со мной для удаления контента.</p>
+      </div>
+
+      <div id="errors" class="tab-content">
+        <h2>Сайт выдаёт ошибки "Не удалось загрузить параграфы" или похожие, что делать?</h2>
+        <p>Если сайт даёт такие ошибки, то вам скорее всего нужно зайти на сайт через <b>режим Инкогнито</b> из-за структуры браузеров, которые любят не обновлять мой сайт по какой-либо причине (кэш браузера).</p>
+        <p>Либо же сайт сломан сам по себе. Можете подождать, возможно, я уже это чиню, но вы можете мне написать:</p>
+        <ul>
+          <li>TG: <b>@verycoolprofile</b></li>
+          <li>DISCORD: <b>@verycoolprofile</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

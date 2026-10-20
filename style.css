@@ -1,0 +1,138 @@
+/* --- ПЕРЕМЕННЫЕ ДЛЯ ТЕМ --- */
+:root {
+  --bg-color: #121212; --text-color: #e0e0e0; --header-bg: #1e1e1e; --border-color: #333;
+  --btn-bg: #2a2a2a; --btn-hover: #3a3a3a; --btn-text: #e0e0e0; --content-bg: #1e1e1e;
+  --modal-bg: #1e1e1e; --modal-overlay: rgba(0,0,0,0.8);
+}
+body.light-theme {
+  --bg-color: #f5f5f5; --text-color: #222; --header-bg: #fff; --border-color: #ddd;
+  --btn-bg: #e0e0e0; --btn-hover: #d0d0d0; --btn-text: #222; --content-bg: #fff;
+  --modal-bg: #fff; --modal-overlay: rgba(0,0,0,0.5);
+}
+
+/* --- БАЗА --- */
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; margin: 0; background-color: var(--bg-color); color: var(--text-color); transition: background-color 1s ease, color 1s ease; overflow: hidden; }
+header { padding: 12px 16px; background-color: var(--header-bg); border-bottom: 1px solid var(--border-color); transition: background-color 1s ease, border-color 1s ease; height: 100px; }
+.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+h1 { margin: 0; font-size: 20px; }
+.header-controls { display: flex; gap: 10px; align-items: center; }
+.author-name { font-weight: 600; color: var(--text-color); opacity: 0.8; margin-right: 5px; }
+
+/* Кнопки в шапке */
+.theme-btn, .info-btn { background: var(--btn-bg); color: var(--btn-text); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+.theme-btn:hover, .info-btn:hover { background: var(--btn-hover); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+/* Кнопки меню */
+nav button, aside button { display: block; width: 100%; text-align: left; margin: 4px 0; padding: 8px 12px; cursor: pointer; background: var(--btn-bg); color: var(--btn-text); border: 1px solid var(--border-color); border-radius: 6px; transition: all 0.2s ease; font-size: 14px; }
+nav button { display: inline-block; width: auto; margin-right: 6px; }
+nav button:hover, aside button:hover { background: var(--btn-hover); transform: translateX(4px); border-color: #666; }
+
+/* --- ОСНОВНОЙ КОНТЕНТ --- */
+main { display: flex; gap: 20px; padding: 20px; width: 100%; height: calc(100vh - 100px); }
+aside { width: 280px; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; padding-right: 8px; }
+section { flex: 1; overflow-y: auto; line-height: 1.6; background: var(--content-bg); padding: 30px; border-radius: 12px; transition: background 1s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+
+/* --- ТОНКИЕ СКРОЛЛБАРЫ --- */
+aside::-webkit-scrollbar, section::-webkit-scrollbar { width: 6px; }
+aside::-webkit-scrollbar-track, section::-webkit-scrollbar-track { background: transparent; }
+aside::-webkit-scrollbar-thumb, section::-webkit-scrollbar-thumb { background-color: var(--border-color); border-radius: 10px; }
+aside::-webkit-scrollbar-thumb:hover, section::-webkit-scrollbar-thumb:hover { background-color: #666; }
+
+/* --- АНИМАЦИИ ПАРАГРАФОВ --- */
+@keyframes chapterFadeIn { 0% { opacity: 0; transform: translateX(30px); } 100% { opacity: 1; transform: translateX(0); } }
+.chapter-item { animation: chapterFadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }
+
+/* --- АНИМАЦИИ ТЕКСТА --- */
+@keyframes slideUpFade { 0% { opacity: 0; transform: translateY(20px) scale(0.98); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.chapter-content { animation: slideUpFade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.fade-out-content { animation: fadeOut 0.2s ease-out forwards; }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-10px); } }
+
+/* --- СПИННЕР ЗАГРУЗКИ --- */
+.loader-container { display: flex; justify-content: center; align-items: center; height: 200px; }
+.loader { width: 40px; height: 40px; border: 3px solid rgba(255, 255, 255, 0.1); border-top-color: #4da6ff; border-radius: 50%; animation: spin 1s linear infinite; }
+body.light-theme .loader { border: 3px solid rgba(0, 0, 0, 0.1); border-top-color: #005bb5; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.placeholder { color: #888; text-align: center; margin-top: 50px; }
+.summary p { margin: 0 0 16px; }
+
+/* --- МОДАЛЬНОЕ ОКНО --- */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: var(--modal-overlay); }
+.modal.show { display: block; }
+.modal-content { background-color: var(--modal-bg); color: var(--text-color); margin: 10% auto; padding: 24px; border: 1px solid var(--border-color); width: 90%; max-width: 600px; border-radius: 12px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: background-color 1s ease; }
+.close-btn { position: absolute; right: 15px; top: 10px; color: var(--text-color); font-size: 28px; font-weight: bold; cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
+.close-btn:hover { opacity: 1; }
+.modal-tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--border-color); margin-bottom: 15px; padding-bottom: 5px; }
+.tab-btn { background: none; border: none; font-size: 16px; cursor: pointer; padding: 5px 10px; color: var(--text-color); opacity: 0.6; font-weight: bold; transition: opacity 0.3s; }
+.tab-btn.active { opacity: 1; border-bottom: 2px solid var(--text-color); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content ul { padding-left: 20px; }
+
+/* --- АНИМАЦИЯ ЗАГРУЗКИ ДЛЯ ПК --- */
+@media (min-width: 769px) {
+  .anim-header-left { opacity: 0; transform: translateX(-100px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-header-right { opacity: 0; transform: translateX(100px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-nav { opacity: 0; transform: translateY(-20px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-content { opacity: 0; transform: translateY(100vh); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-aside { opacity: 0; transform: translateX(-50px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+  body.site-loaded .anim-header-left { opacity: 1; transform: translateX(0); }
+  body.site-loaded .anim-header-right { opacity: 1; transform: translateX(0); }
+  body.site-loaded .anim-nav { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+  body.site-loaded .anim-content { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+  body.site-loaded .anim-aside { opacity: 1; transform: translateX(0); transition-delay: 0.4s; }
+
+  body:not(.site-loaded) button { pointer-events: none; }
+}
+
+/* --- АДАПТИВ И АНИМАЦИЯ ДЛЯ ТЕЛЕФОНОВ --- */
+@media (max-width: 768px) {
+  body { overflow: auto; }
+  header { height: auto; padding-bottom: 20px; }
+  main { flex-direction: column; padding: 10px; height: auto; }
+  
+  /* Возвращаем горизонтальный скролл в одну линию */
+  aside { 
+    width: 100%; 
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    overflow-y: hidden;
+    padding-bottom: 10px; 
+  }
+  
+  /* Скрываем некрасивый скроллбар */
+  aside::-webkit-scrollbar { display: none; } 
+  
+  aside button { width: auto; white-space: nowrap; margin: 0 4px; }
+  section { padding: 20px; overflow-y: visible; }
+  .header-top { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .modal-content { margin: 20% auto; }
+
+  /* Меняем анимацию для параграфов на телефоне (проявление снизу, чтобы не ломать скролл) */
+  @keyframes mobileChapterFadeIn {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .chapter-item {
+    animation-name: mobileChapterFadeIn;
+  }
+
+  /* --- АНИМАЦИЯ ТЕЛЕФОНА (Снизу вверх) --- */
+  .anim-header-left { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-header-right { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-nav { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-aside { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .anim-content { opacity: 0; transform: translateY(50px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+  body.site-loaded .anim-header-left { opacity: 1; transform: translateY(0); }
+  body.site-loaded .anim-header-right { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+  body.site-loaded .anim-nav { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+  body.site-loaded .anim-aside { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+  body.site-loaded .anim-content { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+
+  body:not(.site-loaded) button { pointer-events: none; }
+}
